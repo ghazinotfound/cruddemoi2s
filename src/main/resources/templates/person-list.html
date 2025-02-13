@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Daftar Orang</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<h1>Daftar Orang</h1>
+<a href="/persons/new" class="btn-add">Tambah Orang Baru</a>
+<table>
+    <thead>
+    <tr>
+        <th>NIK</th>
+        <th>Nama</th>
+        <th>Jenis Kelamin</th>
+        <th>Tanggal Lahir</th>
+        <th>Alamat</th>
+        <th>Negara</th>
+        <th>Aksi</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="person : ${persons}">
+        <td th:text="${person.nik}"></td>
+        <td th:text="${person.nama}"></td>
+        <td th:text="${person.jenisKelamin}"></td>
+        <td th:text="${#dates.format(person.tanggalLahir, 'dd-MM-yyyy')}"></td>
+        <td th:text="${person.alamat}"></td>
+        <td th:text="${person.negara}"></td>
+        <td>
+            <a th:href="@{/persons/edit/{id}(id=${person.id})}" class="btn-edit">Edit</a>
+            <a th:href="@{/persons/delete/{id}(id=${person.id})}" class="btn-delete">Hapus</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
